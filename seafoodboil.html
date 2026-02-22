@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KB'S SEAFOOD BOIL — Spice. Heat. Ocean Fire.</title>
+    <meta name="description" content="Premium seafood trays crafted for heat lovers across Accra. Pre-order now with 24-hour notice.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Outfit:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================
+           CSS VARIABLES & RESET
+           ============================================ */
+        :root {
+            --fire-red: #C41E1E;
+            --fire-red-bright: #E83A3A;
+            --burnt-orange: #D4620A;
+            --ember-orange: #F28C28;
+            --gold-accent: #F5A623;
+            --charcoal: #1A1A1A;
+            --charcoal-deep: #0D0D0D;
+            --charcoal-light: #2A2A2A;
+            --smoke: #3A3A3A;
+            --ash: #8A8A8A;
+            --cream: #F5F0E8;
+            --white: #FFFFFF;
+            --gradient-fire: linear-gradient(135deg, var(--fire-red) 0%, var(--burnt-orange) 50%, var(--ember-orange) 100%);
+            --gradient-ember: linear-gradient(135deg, var(--fire-red-bright) 0%, var(--burnt-orange) 100%);
+            --gradient-dark: linear-gradient(180deg, var(--charcoal-deep) 0%, var(--charcoal) 100%);
+            --glow-red: 0 0 30px rgba(196, 30, 30, 0.3);
+            --glow-orange: 0 0 30px rgba(242, 140, 40, 0.3);
+            --font-display: 'Bebas Neue', sans-serif;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Outfit', sans-serif;
+            --section-padding: clamp(60px, 10vw, 120px) clamp(16px, 5vw, 80px);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--fire-red) var(--charcoal-deep);
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--charcoal-deep);
+            color: var(--cream);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--charcoal-deep); }
+        ::-webkit-scrollbar-thumb { background: var(--fire-red); border-radius: 4px; }
+
+        /* ============================================
+           UTILITY & ANIMATION CLASSES
+           ============================================ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-label {
+            font-family: var(--font-display);
+            font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--ember-orange);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .fire-text {
+            background: var(--gradient-fire);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-fire);
+            margin: 24px 0;
+            border-radius: 2px;
+        }
+
+        /* Fade-in on scroll animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Ember particle keyframes */
+        @keyframes float-ember {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.6; }
+            50% { transform: translateY(-20px) scale(1.2); opacity: 1; }
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(196, 30, 30, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(242, 140, 40, 0.5); }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes hero-zoom {
+            from { transform: scale(1.05); }
+            to { transform: scale(1); }
+        }
+
+        /* ============================================
+           BUTTONS
+           ============================================ */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--gradient-fire);
+            color: var(--white);
+            box-shadow: 0 4px 25px rgba(196, 30, 30, 0.4);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 40px rgba(242, 140, 40, 0.6);
+        }
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--cream);
+            border: 2px solid rgba(242, 140, 40, 0.5);
+        }
+        .btn-outline:hover {
+            border-color: var(--ember-orange);
+            background: rgba(242, 140, 40, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 25px rgba(242, 140, 40, 0.2);
+        }
+
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 16px 0;
+            transition: all 0.4s ease;
+        }
+        .navbar.scrolled {
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 10px 0;
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            letter-spacing: 3px;
+            color: var(--white);
+        }
+        .nav-logo span {
+            color: var(--ember-orange);
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        .nav-links a {
+            font-family: var(--font-body);
+            font-weight: 400;
+            font-size: 0.9rem;
+            color: var(--ash);
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-fire);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--cream); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-cta {
+            padding: 10px 24px !important;
+            font-size: 0.85rem !important;
+        }
+
+        /* Mobile menu toggle */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+        .nav-toggle span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background: var(--cream);
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+        .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .nav-toggle.active span:nth-child(2) { opacity: 0; }
+        .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: hero-zoom 12s ease-out forwards;
+        }
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(13, 13, 13, 0.6) 0%,
+                rgba(13, 13, 13, 0.4) 30%,
+                rgba(13, 13, 13, 0.7) 70%,
+                rgba(13, 13, 13, 1) 100%
+            );
+        }
+
+        /* Ember particles */
+        .hero-embers {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .ember {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--ember-orange);
+            animation: float-ember 3s infinite ease-in-out;
+            box-shadow: 0 0 8px var(--ember-orange);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 clamp(20px, 5vw, 80px);
+            animation: fade-in-up 1.2s ease-out 0.3s both;
+        }
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 18px;
+            border: 1px solid rgba(242, 140, 40, 0.4);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--ember-orange);
+            margin-bottom: 24px;
+            backdrop-filter: blur(4px);
+        }
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(3.5rem, 10vw, 8rem);
+            line-height: 0.95;
+            letter-spacing: 4px;
+            margin-bottom: 24px;
+        }
+        .hero-title .line-1 {
+            color: var(--white);
+        }
+        .hero-title .line-2 {
+            background: var(--gradient-fire);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-title .line-3 {
+            color: var(--ember-orange);
+            font-size: 0.7em;
+        }
+        .hero-subtitle {
+            font-family: var(--font-heading);
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            font-weight: 300;
+            color: rgba(245, 240, 232, 0.7);
+            margin-bottom: 36px;
+            font-style: italic;
+            max-width: 520px;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.5;
+            animation: fade-in-up 1s ease 2s both;
+        }
+        .hero-scroll-indicator span {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--ember-orange), transparent);
+            animation: pulse-glow 2s infinite;
+        }
+
+        /* ============================================
+           ABOUT SECTION
+           ============================================ */
+        .about {
+            padding: var(--section-padding);
+            background: var(--charcoal-deep);
+            position: relative;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .about-image {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .about-image img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 16px;
+            transition: transform 0.6s ease;
+        }
+        .about-image:hover img { transform: scale(1.03); }
+        .about-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid rgba(242, 140, 40, 0.2);
+            border-radius: 16px;
+            z-index: 1;
+        }
+        .about-text p {
+            color: rgba(245, 240, 232, 0.75);
+            font-size: 1rem;
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 36px;
+        }
+        .stat {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(242, 140, 40, 0.1);
+        }
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--ember-orange);
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--ash);
+            margin-top: 4px;
+        }
+
+        /* ============================================
+           MENU SECTION
+           ============================================ */
+        .menu {
+            padding: var(--section-padding);
+            background: var(--charcoal);
+            position: relative;
+        }
+        .menu::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--fire-red), var(--burnt-orange), transparent);
+        }
+        .menu-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .menu-header .divider { margin: 24px auto; }
+
+        /* Menu category tabs */
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .menu-tab {
+            padding: 10px 24px;
+            border: 1px solid rgba(242, 140, 40, 0.3);
+            border-radius: 50px;
+            background: transparent;
+            color: var(--ash);
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+        .menu-tab:hover, .menu-tab.active {
+            background: var(--gradient-fire);
+            color: var(--white);
+            border-color: transparent;
+            box-shadow: 0 4px 20px rgba(196, 30, 30, 0.3);
+        }
+
+        /* Menu grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+        .menu-category { display: none; }
+        .menu-category.active { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+
+        .menu-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(242, 140, 40, 0.08);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-fire);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .menu-card:hover {
+            border-color: rgba(242, 140, 40, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+        .menu-card:hover::before { opacity: 1; }
+
+        .menu-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        .menu-card-name {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--cream);
+            flex: 1;
+        }
+        .menu-card-price {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            color: var(--ember-orange);
+            letter-spacing: 1px;
+            white-space: nowrap;
+            margin-left: 12px;
+        }
+        .menu-card-desc {
+            font-size: 0.85rem;
+            color: var(--ash);
+            line-height: 1.6;
+        }
+        .menu-card-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+        .tag-hot {
+            background: rgba(196, 30, 30, 0.2);
+            color: var(--fire-red-bright);
+            border: 1px solid rgba(196, 30, 30, 0.3);
+        }
+        .tag-popular {
+            background: rgba(242, 140, 40, 0.15);
+            color: var(--ember-orange);
+            border: 1px solid rgba(242, 140, 40, 0.3);
+        }
+
+        /* ============================================
+           HOW IT WORKS SECTION
+           ============================================ */
+        .how-it-works {
+            padding: var(--section-padding);
+            background: var(--charcoal-deep);
+            position: relative;
+        }
+        .how-it-works .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .how-it-works .divider { margin: 24px auto; }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            position: relative;
+        }
+        .steps-grid::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--fire-red), var(--burnt-orange), var(--ember-orange), var(--burnt-orange), var(--fire-red));
+            z-index: 0;
+        }
+        .step-card {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .step-number {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--gradient-fire);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--white);
+            box-shadow: 0 4px 20px rgba(196, 30, 30, 0.4);
+        }
+        .step-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+        .step-title {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--cream);
+        }
+        .step-desc {
+            font-size: 0.8rem;
+            color: var(--ash);
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           GALLERY SECTION
+           ============================================ */
+        .gallery {
+            padding: var(--section-padding);
+            background: var(--charcoal);
+        }
+        .gallery .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .gallery .divider { margin: 24px auto; }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 280px);
+            gap: 16px;
+        }
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(13, 13, 13, 0.6), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .gallery-item:hover img { transform: scale(1.08); }
+        .gallery-item:hover::after { opacity: 1; }
+        .gallery-item:nth-child(1) { grid-row: span 2; }
+
+        /* ============================================
+           TESTIMONIALS SECTION
+           ============================================ */
+        .testimonials {
+            padding: var(--section-padding);
+            background: var(--charcoal-deep);
+        }
+        .testimonials .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .testimonials .divider { margin: 24px auto; }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(242, 140, 40, 0.08);
+            border-radius: 16px;
+            padding: 36px;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+        .testimonial-card:hover {
+            border-color: rgba(242, 140, 40, 0.2);
+            transform: translateY(-4px);
+        }
+        .testimonial-quote {
+            font-size: 3rem;
+            line-height: 1;
+            color: var(--fire-red);
+            font-family: var(--font-heading);
+            margin-bottom: 8px;
+            opacity: 0.4;
+        }
+        .testimonial-text {
+            font-size: 0.95rem;
+            color: rgba(245, 240, 232, 0.8);
+            line-height: 1.7;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .testimonial-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--gradient-fire);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            color: var(--white);
+        }
+        .testimonial-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--cream);
+        }
+        .testimonial-handle {
+            font-size: 0.8rem;
+            color: var(--ash);
+        }
+        .testimonial-stars {
+            color: var(--ember-orange);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        /* ============================================
+           URGENCY SECTION
+           ============================================ */
+        .urgency {
+            padding: clamp(60px, 8vw, 100px) clamp(16px, 5vw, 80px);
+            background: linear-gradient(135deg, rgba(196, 30, 30, 0.15) 0%, var(--charcoal) 50%, rgba(212, 98, 10, 0.15) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .urgency::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--fire-red), transparent);
+        }
+        .urgency::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--ember-orange), transparent);
+        }
+        .urgency-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .urgency-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+            color: var(--white);
+        }
+        .urgency-text {
+            font-size: 1.05rem;
+            color: rgba(245, 240, 232, 0.7);
+            margin-bottom: 36px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Countdown Timer */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 36px;
+        }
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(242, 140, 40, 0.15);
+            border-radius: 12px;
+            padding: 16px 20px;
+            min-width: 80px;
+        }
+        .countdown-number {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            color: var(--ember-orange);
+        }
+        .countdown-label {
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--ash);
+            margin-top: 4px;
+        }
+
+        /* ============================================
+           CONTACT SECTION
+           ============================================ */
+        .contact {
+            padding: var(--section-padding);
+            background: var(--charcoal-deep);
+        }
+        .contact .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .contact .divider { margin: 24px auto; }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .contact-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(242, 140, 40, 0.08);
+            border-radius: 16px;
+            padding: 32px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.4s ease;
+        }
+        .contact-card:hover {
+            border-color: rgba(242, 140, 40, 0.2);
+            transform: translateY(-3px);
+        }
+        .contact-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            background: rgba(242, 140, 40, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        .contact-info h4 {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--cream);
+            margin-bottom: 4px;
+        }
+        .contact-info p {
+            font-size: 0.9rem;
+            color: var(--ash);
+        }
+        .contact-info a {
+            color: var(--ember-orange);
+            transition: color 0.3s ease;
+        }
+        .contact-info a:hover { color: var(--gold-accent); }
+
+        .contact-notice {
+            text-align: center;
+            margin-top: 40px;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px dashed rgba(196, 30, 30, 0.3);
+            background: rgba(196, 30, 30, 0.05);
+        }
+        .contact-notice p {
+            font-size: 0.95rem;
+            color: rgba(245, 240, 232, 0.7);
+        }
+        .contact-notice strong {
+            color: var(--fire-red-bright);
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            padding: 40px 0;
+            background: var(--charcoal-deep);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            letter-spacing: 3px;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+        .footer-logo span { color: var(--ember-orange); }
+        .footer-text {
+            font-size: 0.8rem;
+            color: var(--ash);
+        }
+
+        /* ============================================
+           FLOATING WHATSAPP BUTTON
+           ============================================ */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 999;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #25D366;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            animation: pulse-glow 2s infinite;
+            cursor: pointer;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+        }
+        .whatsapp-float svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+        .whatsapp-tooltip {
+            position: absolute;
+            right: 70px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--charcoal-light);
+            color: var(--cream);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .whatsapp-float:hover .whatsapp-tooltip { opacity: 1; }
+
+        /* ============================================
+           MOBILE RESPONSIVE
+           ============================================ */
+        @media (max-width: 992px) {
+            .nav-links { display: none; }
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(13, 13, 13, 0.98);
+                backdrop-filter: blur(20px);
+                padding: 24px;
+                gap: 20px;
+                border-bottom: 1px solid rgba(242, 140, 40, 0.1);
+            }
+            .nav-toggle { display: flex; }
+
+            .about-grid { grid-template-columns: 1fr; gap: 36px; }
+            .about-image img { height: 300px; }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .steps-grid::before { display: none; }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
+            }
+            .gallery-item:nth-child(1) { grid-row: span 1; }
+
+            .testimonials-grid { grid-template-columns: 1fr; }
+
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 640px) {
+            .hero-title { letter-spacing: 2px; }
+            .menu-grid, .menu-category.active {
+                grid-template-columns: 1fr;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+            .countdown { gap: 10px; }
+            .countdown-item { min-width: 65px; padding: 12px 14px; }
+            .about-stats { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+            .stat { padding: 14px 8px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==========================================
+         NAVIGATION
+         ========================================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="nav-logo">KB'S <span>SEAFOOD</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="https://wa.me/233533856150?text=Hi%20KB%27s%20Seafood%20Boil,%20I%20would%20like%20to%20place%20a%20pre-order." class="btn btn-primary nav-cta" target="_blank">Order Now</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ==========================================
+         HERO SECTION
+         ========================================== -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=1920&q=80" alt="Premium seafood boil spread" loading="eager">
+        </div>
+
+        <!-- Floating ember particles -->
+        <div class="hero-embers" id="heroEmbers"></div>
+
+        <div class="hero-content">
+            <div class="hero-badge">Community 25, Accra — Delivery Citywide</div>
+            <h1 class="hero-title">
+                <span class="line-1">SPICE.</span><br>
+                <span class="line-2">HEAT.</span><br>
+                <span class="line-3">OCEAN FIRE.</span>
+            </h1>
+            <p class="hero-subtitle">Premium seafood trays crafted for heat lovers across Accra.</p>
+            <div class="hero-buttons">
+                <a href="https://wa.me/233533856150?text=Hi%20KB%27s%20Seafood%20Boil,%20I%20would%20like%20to%20place%20a%20pre-order." class="btn btn-primary" target="_blank">🔥 Order Now</a>
+                <a href="#menu" class="btn btn-outline">View Menu</a>
+            </div>
+        </div>
+
+        <div class="hero-scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         ABOUT SECTION
+         ========================================== -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image reveal">
+                    <img src="https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80" alt="Seafood preparation">
+                </div>
+                <div class="about-text reveal">
+                    <div class="section-label">Our Story</div>
+                    <h2 class="section-title">Bold Flavors,<br><span class="fire-text">No Apologies.</span></h2>
+                    <div class="divider"></div>
+                    <p>KB's Seafood Boil isn't just a meal — it's a fiery experience born from a passion for bold, unapologetic flavors. Every tray is hand-crafted with the freshest catch, drenched in our signature sauces that bring the heat and keep you coming back.</p>
+                    <p>We operate an exclusive pre-order system with 24-hour notice to guarantee freshness. No shortcuts. No frozen. Just premium seafood, prepared to order and delivered anywhere in Accra.</p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <div class="stat-number">24hr</div>
+                            <div class="stat-label">Pre-Order Notice</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Fresh Daily</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">Accra</div>
+                            <div class="stat-label">Wide Delivery</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         MENU SECTION
+         ========================================== -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <div class="menu-header reveal">
+                <div class="section-label">The Menu</div>
+                <h2 class="section-title">Taste The <span class="fire-text">Fire</span></h2>
+                <div class="divider"></div>
+            </div>
+
+            <!-- Category Tabs -->
+            <div class="menu-tabs reveal">
+                <button class="menu-tab active" data-category="boils">Signature Boils</button>
+                <button class="menu-tab" data-category="rice-pasta">Rice & Pasta</button>
+                <button class="menu-tab" data-category="sauces">Sauces</button>
+                <button class="menu-tab" data-category="sides">Sides</button>
+            </div>
+
+            <!-- Signature Seafood Boils -->
+            <div class="menu-category active" id="cat-boils">
+                <div class="menu-card reveal">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-name">The Classic Boil Tray</h3>
+                        <span class="menu-card-price">GH₵ 250</span>
+                    </div>
+                    <p class="menu-card-desc">Shrimp, crab legs, corn, sausage & potatoes drenched in our signature spicy butter sauce.</p>
+                    <span class="menu-card-tag tag-popular">Popular</span>
+                </div>
+                <div class="menu-card reveal">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-name">The Ocean Fire Tray</h3>
+                        <span class="menu-card-price">GH₵ 350</span>
+                    </div>
+                    <p class="menu-card-desc">Lobster tails, jumbo shrimp, mussels, crab & corn in a fiery Cajun garlic butter blend.</p>
+                    <span class="menu-card-tag tag-hot">🔥 Spicy</span>
+                </div>
+                <div class="menu-card reveal">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-name">Shrimp Boil Tray</h3>
+                        <span class="menu-card-price">GH₵ 180</span>
+                    </div>
+                    <p class="menu-card-desc">Jumbo shrimp, corn on the cob, andouille sausage & red potatoes in lemon pepper butter.</p>
+                </div>
+                <div class="menu-card reveal">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-name">Crab Legs Tray</h3>
+                        <span class="menu-card-price">GH₵ 320</span>
+                    </div>
+                    <p class="menu-card-desc">Snow crab legs served with corn, sausage & potatoes in garlic herb butter.</p>
+                    <span class="menu-card-tag tag-popular">Popular</span>
+                </div>
+                <div class="menu-card reveal">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-name">Lobster & Shrimp Combo</h3>
+                        <span class="menu-card-price">GH₵ 400</span>
+                    </div>
+                    <p class="menu-card-desc">Premium lobster tail and jumbo shrimp with corn, sausage & potatoes in KB's signature sauce.</p>
+                    <span class="menu-card-tag tag-hot">🔥 Premium</span>
+                </div>
+                <div class="menu-card reveal">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-name">The KB Special Platter</h3>
+                        <span class="menu-card-price">GH₵ 500</span>
+                    </div>
+                    <p class="menu-card-desc">The ultimate feast — lobster, crab, shrimp, mussels, corn, sausage & all the fixings.</p>
+                    <span class="menu-card-tag tag-hot">🔥 Best Seller</span>
+                </div>
+            </div>
+
+            <!-- Rice & Pasta Specials -->
+            <div class="menu-category" id="cat-rice-pasta">
+                <div class="menu-card reveal">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-name">Seafood Jollof Rice</h3>
+                        <span class="menu-card-price">GH₵ 150</span>
+                    </div>
+                    <p class="menu-card-desc">Smoky party jollof loaded with shrimp, calamari, and mixed seafood.</p>
+                    <span class="menu-card-tag tag-popular">Popular</span>
+                </div>
+                <div class="menu-card reveal">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-name">Seafood Fried Rice</h3>
+                        <span class="menu-card-price">GH₵ 140</span>
+                    </div>
+                    <p class="menu-card-desc">Stir-fried rice with shrimp, crab meat, vegetables & a touch of heat.</p>
+                </div>
+                <div class="menu-card reveal">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-name">Cajun Shrimp Pasta</h3>
+                        <span class="menu-card-price">GH₵ 170</span>
+                    </div>
+                    <p class="menu-card-desc">Creamy Cajun linguine with sautéed shrimp, bell peppers & parmesan.</p>
+                    <span class="menu-card-tag tag-hot">🔥 Spicy</span>
+                </div>
+                <div class="menu-card reveal">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-name">Lobster Mac & Cheese</h3>
+                        <span class="menu-card-price">GH₵ 200</span>
+                    </div>
+                    <p class="menu-card-desc">Creamy four-cheese mac loaded with tender lobster chunks.</p>
+                    <span class="menu-card-tag tag-popular">Indulgent</span>
+                </div>
+            </div>
+
+            <!-- Sauces -->
+            <div class="menu-category" id="cat-sauces">
+                <div class="menu-card reveal">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-name">KB's Signature Spicy Butter</h3>
+                        <span class="menu-card-price">GH₵ 30</span>
+                    </div>
+                    <p class="menu-card-desc">Our house-made spicy garlic butter — the soul of every boil.</p>
+                    <span class="menu-card-tag tag-hot">🔥 Signature</span>
+                </div>
+                <div class="menu-card reveal">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-name">Cajun Garlic Sauce</h3>
+                        <span class="menu-card-price">GH₵ 30</span>
+                    </div>
+                    <p class="menu-card-desc">Bold Cajun spices blended with roasted garlic and butter.</p>
+                </div>
+                <div class="menu-card reveal">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-name">Lemon Pepper Butter</h3>
+                        <span class="menu-card-price">GH₵ 25</span>
+                    </div>
+                    <p class="menu-card-desc">Bright, zesty lemon with cracked black pepper butter.</p>
+                </div>
+                <div class="menu-card reveal">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-name">Inferno Sauce</h3>
+                        <span class="menu-card-price">GH₵ 35</span>
+                    </div>
+                    <p class="menu-card-desc">For the brave — extreme heat with smoky habanero and ghost pepper.</p>
+                    <span class="menu-card-tag tag-hot">🔥🔥🔥 Extreme</span>
+                </div>
+            </div>
+
+            <!-- Sides -->
+            <div class="menu-category" id="cat-sides">
+                <div class="menu-card reveal">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-name">Corn on the Cob</h3>
+                        <span class="menu-card-price">GH₵ 15</span>
+                    </div>
+                    <p class="menu-card-desc">Buttered and seasoned sweet corn.</p>
+                </div>
+                <div class="menu-card reveal">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-name">Garlic Bread</h3>
+                        <span class="menu-card-price">GH₵ 20</span>
+                    </div>
+                    <p class="menu-card-desc">Toasted buttery garlic bread, perfect for dipping.</p>
+                </div>
+                <div class="menu-card reveal">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-name">Seasoned Potatoes</h3>
+                        <span class="menu-card-price">GH₵ 20</span>
+                    </div>
+                    <p class="menu-card-desc">Cajun-seasoned boiled potatoes.</p>
+                </div>
+                <div class="menu-card reveal">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-name">Coleslaw</h3>
+                        <span class="menu-card-price">GH₵ 15</span>
+                    </div>
+                    <p class="menu-card-desc">Creamy house-made coleslaw for a cool contrast.</p>
+                </div>
+                <div class="menu-card reveal">
+                    <div class="menu-card-header">
+                        <h3 class="menu-card-name">Extra Sausage</h3>
+                        <span class="menu-card-price">GH₵ 25</span>
+                    </div>
+                    <p class="menu-card-desc">Smoky andouille sausage slices.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         HOW IT WORKS SECTION
+         ========================================== -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">How It Works</div>
+                <h2 class="section-title">From Order to <span class="fire-text">Your Door</span></h2>
+                <div class="divider"></div>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card reveal">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">🦐</div>
+                    <h3 class="step-title">Choose Your Tray</h3>
+                    <p class="step-desc">Browse our menu and pick your perfect seafood combination.</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">💬</div>
+                    <h3 class="step-title">Send WhatsApp Order</h3>
+                    <p class="step-desc">Message us directly on WhatsApp with your selections.</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">✅</div>
+                    <h3 class="step-title">Confirm Payment</h3>
+                    <p class="step-desc">Secure your order with mobile money or bank transfer.</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">🔥</div>
+                    <h3 class="step-title">We Prepare Fresh</h3>
+                    <p class="step-desc">Your tray is crafted from scratch with the freshest ingredients.</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-number">5</div>
+                    <div class="step-icon">🚗</div>
+                    <h3 class="step-title">Delivery to You</h3>
+                    <p class="step-desc">Delivered hot and fresh anywhere in Accra.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         GALLERY SECTION
+         ========================================== -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Gallery</div>
+                <h2 class="section-title">Feast Your <span class="fire-text">Eyes</span></h2>
+                <div class="divider"></div>
+            </div>
+
+            <div class="gallery-grid reveal">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?w=800&q=80" alt="Seafood boil tray" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1625943553852-781c6dd46faa?w=600&q=80" alt="Shrimp dish" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=600&q=80" alt="Cajun pasta" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=600&q=80" alt="Fresh lobster" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1590759668628-05b0fc34bb70?w=600&q=80" alt="Crab legs" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         TESTIMONIALS SECTION
+         ========================================== -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Testimonials</div>
+                <h2 class="section-title">What The <span class="fire-text">Streets Say</span></h2>
+                <div class="divider"></div>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">KB's Ocean Fire Tray is absolutely insane. The Cajun garlic butter had me licking the bag. Best seafood boil in Accra, hands down. I order every weekend now!</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">AK</div>
+                        <div>
+                            <div class="testimonial-name">Ama Koranteng</div>
+                            <div class="testimonial-handle">East Legon, Accra</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">Ordered the KB Special Platter for my birthday brunch and it was the highlight. Fresh, spicy, and the portions are no joke. My guests couldn't stop talking about it.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">KM</div>
+                        <div>
+                            <div class="testimonial-name">Kwame Mensah</div>
+                            <div class="testimonial-handle">Cantonments, Accra</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">The Seafood Jollof Rice is a game-changer. Smoky, loaded with shrimp, and that spice level is perfect. Also love that everything comes fresh — you can taste the difference.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">NA</div>
+                        <div>
+                            <div class="testimonial-name">Nana Adjei</div>
+                            <div class="testimonial-handle">Airport Residential, Accra</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         URGENCY SECTION
+         ========================================== -->
+    <section class="urgency" id="urgency">
+        <div class="container reveal">
+            <div class="urgency-icon">🔥</div>
+            <h2 class="urgency-title">LIMITED TRAYS DAILY</h2>
+            <p class="urgency-text">Limited trays prepared daily. Secure your order early. Weekend slots fill fast — don't miss out on the fire.</p>
+
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="cd-days">00</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="cd-hours">00</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="cd-mins">00</div>
+                    <div class="countdown-label">Mins</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="cd-secs">00</div>
+                    <div class="countdown-label">Secs</div>
+                </div>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--ash); margin-bottom: 28px;">Until next weekend order cutoff</p>
+
+            <a href="https://wa.me/233533856150?text=Hi%20KB%27s%20Seafood%20Boil,%20I%20would%20like%20to%20place%20a%20pre-order." class="btn btn-primary" target="_blank">🔥 Secure Your Tray Now</a>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         CONTACT SECTION
+         ========================================== -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Contact</div>
+                <h2 class="section-title">Get In <span class="fire-text">Touch</span></h2>
+                <div class="divider"></div>
+            </div>
+
+            <div class="contact-grid reveal">
+                <a href="tel:0533856150" class="contact-card">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-info">
+                        <h4>Phone</h4>
+                        <p>0533 856 150</p>
+                    </div>
+                </a>
+
+                <a href="https://wa.me/233533856150" class="contact-card" target="_blank">
+                    <div class="contact-icon">💬</div>
+                    <div class="contact-info">
+                        <h4>WhatsApp</h4>
+                        <p>+233 533 856 150</p>
+                    </div>
+                </a>
+
+                <a href="https://www.snapchat.com/add/yosoy_reina20" class="contact-card" target="_blank">
+                    <div class="contact-icon">👻</div>
+                    <div class="contact-info">
+                        <h4>Snapchat</h4>
+                        <p>@yosoy_reina20</p>
+                    </div>
+                </a>
+
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-info">
+                        <h4>Location</h4>
+                        <p>Community 25, Tema — Accra</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-notice reveal">
+                <p>⏰ <strong>24-hour pre-order notice required.</strong> All orders must be placed at least 24 hours in advance to guarantee freshness and availability.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         FOOTER
+         ========================================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">KB'S <span>SEAFOOD BOIL</span></div>
+            <p class="footer-text">© 2025 KB's Seafood Boil. All Rights Reserved. | Community 25, Accra</p>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+         FLOATING WHATSAPP BUTTON
+         ========================================== -->
+    <a href="https://wa.me/233533856150?text=Hi%20KB%27s%20Seafood%20Boil,%20I%20would%20like%20to%20place%20a%20pre-order."
+       class="whatsapp-float" target="_blank" aria-label="Order on WhatsApp">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        <span class="whatsapp-tooltip">Order on WhatsApp</span>
+    </a>
+
+
+    <!-- ==========================================
+         JAVASCRIPT
+         ========================================== -->
+    <script>
+        // =============================================
+        // NAVBAR — Scroll behavior & mobile toggle
+        // =============================================
+        const navbar = document.getElementById('navbar');
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile nav on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // =============================================
+        // SCROLL REVEAL — Fade-in animation on scroll
+        // =============================================
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // =============================================
+        // EMBER PARTICLES — Hero section
+        // =============================================
+        const embersContainer = document.getElementById('heroEmbers');
+        for (let i = 0; i < 20; i++) {
+            const ember = document.createElement('div');
+            ember.className = 'ember';
+            ember.style.left = Math.random() * 100 + '%';
+            ember.style.top = Math.random() * 100 + '%';
+            ember.style.animationDelay = Math.random() * 3 + 's';
+            ember.style.animationDuration = (2 + Math.random() * 3) + 's';
+            ember.style.width = (2 + Math.random() * 4) + 'px';
+            ember.style.height = ember.style.width;
+            ember.style.opacity = 0.3 + Math.random() * 0.5;
+            embersContainer.appendChild(ember);
+        }
+
+        // =============================================
+        // MENU TABS — Category switching
+        // =============================================
+        const menuTabs = document.querySelectorAll('.menu-tab');
+        const menuCategories = document.querySelectorAll('.menu-category');
+
+        menuTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                menuTabs.forEach(t => t.classList.remove('active'));
+                menuCategories.forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                const catId = 'cat-' + tab.dataset.category;
+                document.getElementById(catId).classList.add('active');
+
+                // Re-observe newly visible cards for animation
+                document.querySelectorAll('#' + catId + ' .reveal').forEach(el => {
+                    el.classList.remove('visible');
+                    revealObserver.observe(el);
+                });
+            });
+        });
+
+        // =============================================
+        // COUNTDOWN TIMER — Next weekend cutoff
+        // =============================================
+        function getNextWeekendCutoff() {
+            const now = new Date();
+            const day = now.getDay();
+            // Cutoff: Friday 6PM
+            let daysUntilFriday = (5 - day + 7) % 7;
+            if (daysUntilFriday === 0 && now.getHours() >= 18) {
+                daysUntilFriday = 7;
+            }
+            const target = new Date(now);
+            target.setDate(now.getDate() + daysUntilFriday);
+            target.setHours(18, 0, 0, 0);
+            return target;
+        }
+
+        function updateCountdown() {
+            const target = getNextWeekendCutoff();
+            const now = new Date();
+            const diff = target - now;
+
+            if (diff <= 0) {
+                document.getElementById('cd-days').textContent = '00';
+                document.getElementById('cd-hours').textContent = '00';
+                document.getElementById('cd-mins').textContent = '00';
+                document.getElementById('cd-secs').textContent = '00';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+            document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+            document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+
+</body>
+</html>
